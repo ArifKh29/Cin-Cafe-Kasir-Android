@@ -41,13 +41,13 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:hint="Nama Minuman"
-        android:id="@+id/inNamaMenu"
+        android:id="@+id/inNamaMinuman"
         android:gravity="center_horizontal"
         android:paddingLeft="10dp"/>
 
     <EditText
         android:layout_marginTop="20dp"
-        android:layout_below="@id/inNamaMenu"
+        android:layout_below="@id/inNamaMinuman"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -76,10 +76,8 @@
         android:entries="@array/listdrink"
         android:gravity="center">
     </Spinner>
-
-
     <Button
-        android:id="@+id/btnTmbhMenu"
+        android:id="@+id/btnTmbhMinum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/listDrink"
