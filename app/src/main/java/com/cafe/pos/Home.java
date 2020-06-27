@@ -33,19 +33,20 @@ public class Home extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    Toast toast = Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_LONG);
-                    toast.show();
+
                     return true;
                 case R.id.management:
                     Intent intent = new Intent(Home.this, Management.class);
                     startActivity(intent);
+                    return true;
                 case R.id.history:
-                    Toast toast3 = Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_LONG);
-                    toast3.show();
+                    Intent j = new Intent (Home.this, History.class);
+                    startActivity(j);
                     return true;
                 case R.id.setting:
                    Intent i = new Intent (Home.this, Setting.class);
                    startActivity(i);
+                    return true;
             }
             return false;
         }
