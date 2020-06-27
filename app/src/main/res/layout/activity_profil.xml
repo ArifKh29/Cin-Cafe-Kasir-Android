@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UbahPassword">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:padding="5dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:src="@drawable/akun"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"/>
+
+        <RelativeLayout
+            android:layout_width="402dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            tools:ignore="MissingConstraints">
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="340dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:hint="Username"
+                android:textSize="16dp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="402dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            tools:ignore="MissingConstraints">
+
+            <EditText
+                android:id="@+id/nama"
+                android:layout_width="340dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:hint="Nama"
+                android:textSize="16dp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="402dp"
+            android:layout_height="45dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            tools:ignore="MissingConstraints">
+
+            <EditText
+                android:id="@+id/status"
+                android:layout_width="340dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:hint="Status"
+                android:textSize="16dp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="50dp"
+            android:layout_width="190dp"
+            android:layout_height="50dp"
+            android:text="UBAH PROFIL" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
