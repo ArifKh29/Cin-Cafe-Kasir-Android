@@ -76,8 +76,6 @@
         android:entries="@array/listdrink"
         android:gravity="center">
     </Spinner>
-
-
     <Button
         android:id="@+id/btnTmbhMenu"
         android:layout_width="wrap_content"
