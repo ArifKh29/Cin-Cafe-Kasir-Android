@@ -13,7 +13,7 @@ public class DataHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION= 1;
     private static final String CREATE_TABLE1="CREATE TABLE menu(ID INTEGER PRIMARY KEY AUTOINCREMENT, nama_menu VARCHAR(255), harga INTEGER(15), jenis CHAR(20), `status` varchar(7), `image` blob)";
     private static final String CREATE_TABLE2="CREATE TABLE cart(id_cart INTEGER PRIMARY KEY AUTOINCREMENT, id_trx VARCHAR(7), nama_pesanan VURCHAR(255), harga INTEGER(15), ket VARCHAR(5),  jumlah INTEGER(3), subtotal INTEGER(10))";
-    private static final String CREATE_TABLE5="CREATE TABLE `drink` ( `id` int(11) NOT NULL,`nama_drink` varchar(70) NOT NULL, `hot_price` int(12) NOT NULL,`ice_price` int(12) NOT NULL,`jenis` varchar(50) NOT NULL,`status` varchar(7) NOT NULL, `image` varchar(40))";
+    private static final String CREATE_TABLE5="CREATE TABLE `drink` ( `id` int(11) NOT NULL,`nama_drink` varchar(70) NOT NULL, `hot_price` int(12) NOT NULL,`ice_price` int(12) NOT NULL,`jenis` varchar(50),`status` varchar(7) NOT NULL, `image` varchar(40))";
     private static final String CREATE_TABLE3="CREATE TABLE transaksi(id_trx VARCHAR(7) PRIMARY KEY, id_user VARCHAR(7), tanggal DATE, total INTEGER, bayar INTEGER, kembalian INTEGER)";
     private static final String CREATE_TABLE4="CREATE TABLE user(id_user VARCHAR(7), username VARCHAR(10), nama CHAR, password VARCHAR(12), status CHAR(5))";
     //private static final String DROP_TABLE="DROP TABLE  IF EXISTS "+TABLE_NAME;
@@ -234,6 +234,22 @@ public class DataHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean addMinum(String namaminum, String hargahot,String hargaice, byte[] image) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        //String addmenu = "INSERT INTO menu (nama_menu, harga, image) VALUES ('"+nama+"', '"+harga+"', '"+image+"')";
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nama_drink", namaminum);
+        contentValues.put("hot_price", hargahot);
+        contentValues.put("ice_price", hargaice);
+        contentValues.put("image", image);
+        long result = db.insert("drink",null,contentValues);
+        if (result == -1){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
     public User Authenticate(User user) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query("user",// Selecting Table

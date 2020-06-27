@@ -24,8 +24,7 @@ import java.io.InputStream;
 
 public class AddMenu extends AppCompatActivity {
     final int REQUEST_CODE_GALERY = 999;
-    Button btnChoose, btnAdd, dropdownmenu;
-
+    Button btnChoose, btnAdd;
     EditText namaMenu, hargaMenu;
     DataHelper dataHelper;
     ImageView myImg;
@@ -36,7 +35,6 @@ public class AddMenu extends AppCompatActivity {
         dataHelper = new DataHelper(this);
         namaMenu = (EditText) findViewById(R.id.inNamaMenu);
         hargaMenu = (EditText) findViewById(R.id.inHarga);
-        dropdownmenu = findViewById(R.id.dropdown_menu);
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnAdd = (Button) findViewById(R.id.btnTmbhMenu);
         myImg = (ImageView) findViewById(R.id.myImg);
