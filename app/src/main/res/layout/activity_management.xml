@@ -1,29 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bgColor"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="20dp"
-    android:gravity="center"
     tools:context=".Management">
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardFood"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></RelativeLayout>
+        android:layout_height="80dp"
+        app:cardBackgroundColor="@color/bgBtnHome"
+        android:layout_alignParentTop="true">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage Food &amp; Snack"
+            android:layout_marginLeft="10dp"
+            android:textSize="30dp"/>/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCoffe"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/cardFood"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        app:cardBackgroundColor="@color/bgBtnHome">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage Drink / Coffe"
+            android:layout_marginLeft="10dp"
+            android:textSize="30dp"/>/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/addMenu"
+        android:onClick="tambahMenu"
+        app:cardBackgroundColor="@color/bgBtnHome"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/cardCoffe">
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tambah Menu"
+            android:layout_marginLeft="10dp"
+            android:textSize="30dp"/>
+    </androidx.cardview.widget.CardView>
 
 
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="end|bottom"-->
-        <!--android:src="@drawable/icon_home"-->
-        <!--android:layout_margin="15dp"-->
-        <!--app:fabSize="normal"-->
-        <!--app:borderWidth="0dp"-->
-        <!--app:elevation="6dp"-->
-        <!--android:backgroundTint="@color/colorPrimary"-->
-        <!--android:id="@+id/fab1"/>-->
-
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
