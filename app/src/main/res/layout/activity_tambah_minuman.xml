@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/bgColor"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddMenu">
@@ -17,9 +18,9 @@
             android:id="@+id/myImg"
             android:layout_width="200dp"
             android:layout_height="200dp"
+            android:layout_marginTop="30dp"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
 
             app:srcCompat="@mipmap/ic_launcher_round" />
 
@@ -39,7 +40,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:hint="Nama Makanan"
+        android:hint="Nama Minuman"
         android:id="@+id/inNamaMenu"
         android:gravity="center_horizontal"
         android:paddingLeft="10dp"/>
@@ -50,32 +51,41 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:hint="Harga Makanan"
+        android:hint="Harga Minuman"
         android:id="@+id/inHarga"
         android:gravity="center_horizontal"
         android:paddingLeft="10dp"/>
 
-
     <Spinner
         android:id="@+id/listFood"
-        android:layout_width="300dp"
-        android:layout_height="30dp"
-        android:layout_below="@+id/inHarga"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="69dp"
+        android:layout_marginTop="412dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="224dp"
         android:background="@color/bgToolbar"
-        android:entries="@array/listfood"
+        android:entries="@array/listdrink"
         android:gravity="center">
-    </Spinner>
 
+    </Spinner>
 
     <Button
         android:id="@+id/btnTmbhMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/listFood"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
+        android:layout_width="207dp"
+        android:layout_height="17dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="488dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="153dp"
         android:background="@color/bgBtnHome"
-        android:text="Tambah Makanan" />
+        android:text="Tambah Minuman" />
 </RelativeLayout>

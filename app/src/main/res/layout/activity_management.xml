@@ -12,6 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:onClick="manageFood"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="40dp"
         app:cardBackgroundColor="@color/bgBtnHome"
         android:layout_alignParentTop="true">
         <TextView
@@ -27,8 +30,10 @@
         android:id="@+id/cardCoffe"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
         android:layout_below="@+id/cardFood"
-        android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         app:cardBackgroundColor="@color/bgBtnHome">
         <TextView
@@ -45,6 +50,9 @@
         android:onClick="tambahMenu"
         app:cardBackgroundColor="@color/bgBtnHome"
         android:layout_width="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
         android:layout_height="80dp"
         android:layout_below="@+id/cardCoffe">
         <TextView

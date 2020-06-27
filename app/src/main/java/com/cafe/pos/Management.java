@@ -30,6 +30,10 @@ public class Management extends AppCompatActivity {
 
     public void manageFood(View view) {
         Intent intent = new Intent(Management.this,ManageFood.class);
+
+    }
+    public void tambahMinuman(View view){
+        Intent intent = new Intent(Management.this, TambahMinuman.class );
         startActivity(intent);
     }
 }
