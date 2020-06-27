@@ -39,8 +39,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(CartViewHolder holder, final int position) {
-        holder.txtFood.setText(dataList.get(position).getNama());
-        holder.txtHarga.setText(dataList.get(position).getHarga());
+        holder.txtFood.setText(dataList.get(position).getNama()+" "+dataList.get(position).getKet());
+        holder.txtHarga.setText(dataList.get(position).getHarga()+" x "+dataList.get(position).getJumlah()+"pcs");
+//        holder.txtKet.setText(dataList.get(position).getKet());
     }
 
     @Override
@@ -49,12 +50,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public class CartViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView txtFood, txtHarga;
+        private TextView txtFood, txtHarga, txtKet;
         private CardView cvmain;
         public CartViewHolder(View itemView) {
             super(itemView);
             txtFood = (TextView) itemView.findViewById(R.id.txtFood);
             txtHarga = (TextView) itemView.findViewById(R.id.txtHarga);
+//            txtKet = (TextView) itemView.findViewById(R.id.txtKet);
             cvmain = (CardView) itemView.findViewById(R.id.cv_cart);
             itemView.setOnClickListener(this);
         }

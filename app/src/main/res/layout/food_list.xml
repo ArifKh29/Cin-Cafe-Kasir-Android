@@ -5,14 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="6dp"
     app:cardUseCompatPadding="true"
-    android:id="@+id/cv_main">
+    android:id="@+id/cv_main"
+    app:cardBackgroundColor="@color/bgBtnHome">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:background="@color/bgBtnHome">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

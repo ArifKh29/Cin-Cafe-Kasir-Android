@@ -122,9 +122,74 @@ public class Cart extends AppCompatActivity {
                     });
                 }
             });
+
         }
 
 
+    }
+    private void setOnClickListener() {
+        listener = new CartAdapter.RecyclerViewListener() {
+            @Override
+            public void onClick(View v, int position) {
+                //Toast.makeText(getApplicationContext(), (CharSequence) foodMdlArrayList.get(position).getNama(),Toast.LENGTH_LONG).show();
+                final Dialog dialog = new Dialog(Cart.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.bottom_sheet);
+                final TextView dtxtNama = (TextView) dialog.findViewById(R.id.dtxtNama);
+                final TextView dtxtHarga = (TextView) dialog.findViewById(R.id.dtxtHarga);
+                final TextView txtTtlJumlah = (TextView) dialog.findViewById(R.id.txtTtlJumlah);
+                final TextView jumlah = (TextView) dialog.findViewById(R.id.jumlah);
+                Button btnMin = (Button) dialog.findViewById(R.id.btnMin);
+                Button btnPlus = (Button) dialog.findViewById(R.id.btnPlus);
+                Button btnCart = (Button) dialog.findViewById(R.id.btnCart);
+                dtxtNama.setText(cartMdlList.get(position).getNama());
+                final String harga = cartMdlList.get(position).getHarga();
+                dtxtHarga.setText(harga);
+                final String id = cartMdlList.get(position).getId();
+                dialog.show();
+                btnMin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int newJumlah = Integer.parseInt(jumlah.getText().toString()) - 1;
+                        int newharga = newJumlah * Integer.parseInt(harga);
+                        if (newJumlah <= 0) {
+                            txtTtlJumlah.setText("0");
+                            jumlah.setText("0");
+                        } else {
+                            txtTtlJumlah.setText(String.valueOf(newharga));
+                            jumlah.setText(Integer.toString(newJumlah));
+                        }
+                    }
+                });
+                btnPlus.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int newJumlah = Integer.parseInt(jumlah.getText().toString()) + 1;
+                        int newharga = newJumlah * Integer.parseInt(harga);
+                        txtTtlJumlah.setText(String.valueOf(newharga));
+                        jumlah.setText(Integer.toString(newJumlah));
+                        //Toast.makeText(getApplicationContext(),newJumlah,Toast.LENGTH_LONG).show();
+                    }
+                });
+                btnCart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String idtrx = dataHelper.genID();
+                        String idmenu = id;
+                        String ket = "";
+                        String nama = dtxtNama.getText().toString();
+                        String harga = dtxtHarga.getText().toString();
+                        String dbjumlah = jumlah.getText().toString();
+                        String subtotal = txtTtlJumlah.getText().toString();
+                        Toast.makeText(getApplicationContext(), nama + " Telah Ditambahakan", Toast.LENGTH_LONG).show();
+                        dataHelper.addtoCart(idtrx, idmenu, nama, harga, ket, dbjumlah, subtotal);
+                        dialog.cancel();
+                    }
+                });
+
+
+            }
+        };
     }
 
     void addData(){
@@ -137,14 +202,15 @@ public class Cart extends AppCompatActivity {
             while (cursor.moveToNext()){
                 CartMdl cartMdl = new CartMdl();
                 cartMdl.setId(cursor.getString(0));
-                cartMdl.setNama(cursor.getString(1));
-                cartMdl.setHarga(cursor.getString(2));
-                cartMdl.setJenis(cursor.getString(3));
+                cartMdl.setNama(cursor.getString(2));
+                cartMdl.setHarga(cursor.getString(3));
+                cartMdl.setKet(cursor.getString(4));
+                cartMdl.setJumlah(cursor.getString(5));
 
                 cartMdlList.add(cartMdl);
 
             }
-            //setOnClickListener();
+            setOnClickListener();
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
             adapter = new CartAdapter(getApplicationContext(), cartMdlList, listener);
             recyclerView.setAdapter(adapter);

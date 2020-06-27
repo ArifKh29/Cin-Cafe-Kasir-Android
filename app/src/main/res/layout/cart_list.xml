@@ -5,50 +5,89 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="6dp"
     app:cardUseCompatPadding="true"
-    android:id="@+id/cv_cart">
+    android:id="@+id/cv_cart"
+    app:cardBackgroundColor="@color/bgBtnHome">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:orientation="vertical"
-        android:padding="5dp">
+        android:padding="5dp"
+        android:background="@color/bgBtnHome">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imgfood"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@android:drawable/btn_star_big_on"
-                app:srcCompat="@android:drawable/btn_star_big_on" />
+            <!--<ImageView-->
+            <!--android:id="@+id/imgfood"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="70dp"-->
+            <!--android:src="@android:drawable/btn_star_big_on"-->
+            <!--app:srcCompat="@android:drawable/btn_star_big_on" />-->
 
             <TextView
                 android:id="@+id/txtFood"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/imgfood"
-                android:layout_marginLeft="80dp"
-                android:text="Hahahahaha" />
+                android:layout_marginLeft="10dp"
+                android:text="Menu"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/txtHarga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtFood"
-                android:layout_alignLeft="@id/imgfood"
-                android:layout_marginLeft="85dp"
-                android:text="Hahahahaha" />
+                android:layout_marginLeft="15dp"
+                android:text="Price" />
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_marginLeft="250dp"-->
+            <!--android:paddingTop="10dp"-->
+            <!--android:id="@+id/txtKet"/>-->
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/txtFood"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="184dp"
-                android:layout_marginTop="18dp"
-                android:layout_toEndOf="@+id/txtHarga"
-                app:srcCompat="@android:drawable/ic_menu_delete" />
+                android:layout_marginLeft="300dp"
+                android:layout_marginTop="1dp"
+                android:visibility="invisible"
+                android:src="@android:drawable/ic_menu_delete" />
+
+            <!--<Button-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="38dp"-->
+            <!--android:text="-"-->
+            <!--android:layout_marginLeft="200dp"-->
+            <!--android:layout_below="@+id/imageView"-->
+            <!--android:id="@+id/minCart"/>-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/jmlCart"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@+id/imageView"-->
+            <!--android:padding="10dp"-->
+            <!--android:text="1"-->
+            <!--android:layout_marginLeft="250dp"-->
+            <!--/>-->
+            <!--<Button-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="38dp"-->
+            <!--android:text="+"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_toRightOf="@+id/jmlCart"-->
+            <!--android:layout_below="@+id/imageView"/>-->
         </RelativeLayout>
 
     </LinearLayout>

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:elevation="4dp"
-        android:background="@color/colorWhite"
+        android:background="@color/bgToolbar"
         android:theme="@style/AppTheme.AppBarOverlay">
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="341dp"
@@ -34,29 +34,30 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:layout_below="@+id/AppBar"
-        android:id="@+id/txtDaftardaun"
-        android:textSize="20dp"
-        android:textStyle="bold|italic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Daftar Menu Makanan"/>
-    <View
-        android:layout_below="@+id/txtDaftardaun"
-        android:id="@+id/garis"
-        android:paddingBottom="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginBottom="12dp"
-        android:background="#5d5d5d" />
+    <!--<TextView-->
+        <!--android:layout_below="@+id/AppBar"-->
+        <!--android:id="@+id/txtDaftardaun"-->
+        <!--android:textSize="20dp"-->
+        <!--android:textStyle="bold|italic"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Daftar Menu Makanan"/>-->
+    <!--<View-->
+        <!--android:layout_below="@+id/AppBar"-->
+        <!--android:id="@+id/garis"-->
+        <!--android:paddingBottom="5dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_marginTop="3dp"-->
+        <!--android:layout_marginBottom="12dp"-->
+        <!--android:background="#5d5d5d" />-->
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/garis"
+        android:layout_below="@+id/AppBar"
         android:nestedScrollingEnabled="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_food">
+        android:id="@+id/rv_food"
+        android:background="@color/bgColor">
 
     </androidx.recyclerview.widget.RecyclerView>
 

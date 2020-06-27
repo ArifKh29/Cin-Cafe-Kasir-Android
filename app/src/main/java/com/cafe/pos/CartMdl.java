@@ -3,16 +3,25 @@ package com.cafe.pos;
 public class CartMdl {
     private String nama;
     private String harga;
-    private String jenis;
+    private String ket;
     private String id;
-
+    private String jumlah;
 
     public  CartMdl(){}
-    public CartMdl(String nama, String harga, String jenis, String id){
+    public CartMdl(String nama, String harga, String ket, String id, String jumlah){
         this.nama = nama;
         this.harga = harga;
-        this.jenis = jenis;
+        this.ket = ket;
         this.id = id;
+        this.jumlah = jumlah;
+    }
+
+    public String getJumlah() {
+        return jumlah;
+    }
+
+    public void setJumlah(String jumlah) {
+        this.jumlah = jumlah;
     }
 
     public String getNama() {
@@ -31,12 +40,12 @@ public class CartMdl {
         this.harga = harga;
     }
 
-    public String getJenis(){
-        return jenis;
+    public String getKet(){
+        return ket;
     }
 
-    public void setJenis(String jenis){
-        this.jenis = jenis;
+    public void setKet(String jenis){
+        this.ket = jenis;
     }
 
     public String  getId(){

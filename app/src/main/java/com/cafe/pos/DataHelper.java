@@ -179,7 +179,7 @@ public class DataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String idtrx = genID();
         System.out.println(idtrx);
-        Cursor cursor = db.rawQuery("SELECT id_cart,id_trx,nama_pesanan,harga,jumlah,subtotal FROM cart WHERE id_trx ='"+idtrx+"'",null);
+        Cursor cursor = db.rawQuery("SELECT id_cart,id_trx,nama_pesanan,harga,ket,jumlah,subtotal FROM cart WHERE id_trx ='"+idtrx+"'",null);
         return cursor;
     }
 
@@ -197,7 +197,7 @@ public class DataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String idtrx = genID();
         System.out.println("alalala"+countCart());
-        String selectQuery = "SELECT SUM(jumlah) FROM cart WHERE id_trx='"+idtrx+"'";
+        String selectQuery = "SELECT SUM(harga) FROM cart WHERE id_trx='"+idtrx+"'";
         Cursor cursor = db.rawQuery(selectQuery, null);
         int value = 0;
         int count = cursor.getCount();

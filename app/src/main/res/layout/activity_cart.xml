@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Cart">
+    tools:context=".Cart"
+    android:background="@color/bgColor">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_cart">
+        android:id="@+id/rv_cart"
+        >
 
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -18,7 +20,7 @@
        android:layout_height="100dp"
        android:orientation="horizontal"
        android:layout_alignParentBottom="true"
-       android:background="@color/colorBtmCart">
+       android:background="@color/bgToolbar">
 
        <LinearLayout
            android:layout_width="match_parent"

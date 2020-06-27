@@ -107,8 +107,9 @@ public class Food extends AppCompatActivity {
                         String harga = dtxtHarga.getText().toString();
                         String dbjumlah = jumlah.getText().toString();
                         String subtotal = txtTtlJumlah.getText().toString();
-                        Toast.makeText(getApplicationContext(),idtrx,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),nama+" Telah Ditambahakan",Toast.LENGTH_LONG).show();
                         db.addtoCart(idtrx, idmenu, nama, harga, ket , dbjumlah,subtotal );
+                        dialog.cancel();
                     }
                 });
 
