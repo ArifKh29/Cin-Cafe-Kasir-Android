@@ -32,25 +32,47 @@
             android:layout_marginRight="15dp"
             android:text="Pilih gambar" />
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/tNama"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgAdd"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="15dp"
+        android:textSize="20dp"
+        android:text="Nama: "/>
     <EditText
+
+        android:layout_toRightOf="@+id/tNama"
         android:layout_marginTop="20dp"
         android:layout_below="@id/imgAdd"
-        android:layout_width="300dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
         android:layout_centerHorizontal="true"
         android:hint="Nama Makanan"
         android:id="@+id/inNamaMenu"
         android:gravity="center_horizontal"
         android:paddingLeft="10dp"/>
-
+    <TextView
+        android:id="@+id/tHarga"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tNama"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="15dp"
+        android:textSize="20dp"
+        android:text="Harga : "/>
     <EditText
+
         android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/tHarga"
         android:layout_below="@id/inNamaMenu"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:hint="Harga Makanan"
+        android:layout_alignParentRight="true"
         android:id="@+id/inHarga"
         android:gravity="center_horizontal"
         android:paddingLeft="10dp"/>
@@ -76,6 +98,6 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:background="@color/bgBtnHome"
-        android:text="Tambah Makanan" />
+        android:text="Ubah" />
 
 </RelativeLayout>

@@ -175,6 +175,12 @@ public class DataHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor getfood(String id_food){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM menu WHERE ID='"+id_food+"'",null);
+        return cursor;
+    }
+
     public Cursor showCart(){
         SQLiteDatabase db = this.getReadableDatabase();
         String idtrx = genID();
@@ -216,6 +222,8 @@ public class DataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL(insertTransaksi);
     }
+
+
 
 
     public boolean addMenu(String nama, String harga, byte[] image) {
@@ -267,6 +275,24 @@ public class DataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE cart SET jumlah='"+jml+"', subtotal='"+subtotal+"' WHERE id_cart='"+id_cart+"'";
         db.execSQL(query);
+    }
+
+    public boolean updateMenu(String id_food, String nama, String harga, byte[] image) {
+        String strFilter = "ID=" + id_food;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nama_menu", nama);
+        contentValues.put("harga", harga);
+        contentValues.put("image", image);
+        long result = db.update("menu",contentValues, strFilter, null);
+        if (result == -1){
+            return false;
+        }
+        else {
+            return true;
+        }
+//        String update = "UPDATE menu SET nama_menu='"+nama+"', harga='"+harga+"', image='"+image+"' WHERE ID='"+id_food+"'";
+//        db.execSQL(update);
     }
 }
 
