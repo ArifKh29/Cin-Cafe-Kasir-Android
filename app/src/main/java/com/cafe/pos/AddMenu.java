@@ -40,8 +40,6 @@ public class AddMenu extends AppCompatActivity {
         btnChoose = (Button) findViewById(R.id.btnChoose);
         btnAdd = (Button) findViewById(R.id.btnTmbhMenu);
         myImg = (ImageView) findViewById(R.id.myImg);
-
-
         btnChoose.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
