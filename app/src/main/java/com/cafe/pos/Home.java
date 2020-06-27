@@ -39,15 +39,13 @@ public class Home extends AppCompatActivity {
                 case R.id.management:
                     Intent intent = new Intent(Home.this, Management.class);
                     startActivity(intent);
-
                 case R.id.history:
                     Toast toast3 = Toast.makeText(getApplicationContext(), "History", Toast.LENGTH_LONG);
                     toast3.show();
                     return true;
                 case R.id.setting:
-                    Toast toast4 = Toast.makeText(getApplicationContext(), "Setting", Toast.LENGTH_LONG);
-                    toast4.show();
-                    return true;
+                   Intent i = new Intent (Home.this, Setting.class);
+                   startActivity(i);
             }
             return false;
         }

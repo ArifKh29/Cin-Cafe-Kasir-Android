@@ -1,9 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Setting">
+    app:cardCornerRadius="1dp"
+    app:cardUseCompatPadding="true">
 
+    <LinearLayout
+        android:layout_width="403dp"
+        android:layout_height="199dp"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:padding="5dp"
+        tools:ignore="MissingConstraints">
+
+        <RelativeLayout
+            android:layout_width="382dp"
+            android:layout_height="46dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:onClick="profil">
+
+            <ImageView
+                android:id="@+id/imgprofil"
+                android:layout_width="60dp"
+                android:layout_height="62dp"
+                android:src="@drawable/profil" />
+
+            <TextView
+                android:id="@+id/txtprofil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/imgprofil"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="80dp"
+                android:layout_marginBottom="10dp"
+                android:text="Profil"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="382dp"
+            android:layout_height="46dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:onClick="pass">
+
+            <ImageView
+                android:id="@+id/imgpass"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:src="@drawable/kunci" />
+
+            <TextView
+                android:id="@+id/txtpass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/imgpass"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="80dp"
+                android:text="Ubah Password"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="382dp"
+            android:layout_height="46dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:onClick="logout">
+
+            <ImageView
+                android:id="@+id/imglogout"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:src="@drawable/logout" />
+
+            <TextView
+                android:id="@+id/logout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/imglogout"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="80dp"
+                android:text="Logout"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
