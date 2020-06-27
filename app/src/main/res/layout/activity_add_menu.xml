@@ -55,7 +55,6 @@
         android:gravity="center_horizontal"
         android:paddingLeft="10dp"/>
 
-
     <Spinner
         android:id="@+id/listFood"
         android:layout_width="300dp"

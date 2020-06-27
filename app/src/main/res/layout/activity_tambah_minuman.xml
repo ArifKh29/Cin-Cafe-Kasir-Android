@@ -51,41 +51,40 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:hint="Harga Minuman"
-        android:id="@+id/inHarga"
+        android:hint="Harga Minuman Panas"
+        android:id="@+id/inHarga1"
         android:gravity="center_horizontal"
         android:paddingLeft="10dp"/>
-
+    <EditText
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/inHarga1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:hint="Harga Minuman Dingin"
+        android:id="@+id/inHarga2"
+        android:gravity="center_horizontal"
+        android:paddingLeft="10dp"/>
     <Spinner
-        android:id="@+id/listFood"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="69dp"
-        android:layout_marginTop="412dp"
-        android:layout_marginEnd="75dp"
-        android:layout_marginBottom="224dp"
+        android:id="@+id/listDrink"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/inHarga2"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
         android:background="@color/bgToolbar"
         android:entries="@array/listdrink"
         android:gravity="center">
-
     </Spinner>
+
 
     <Button
         android:id="@+id/btnTmbhMenu"
-        android:layout_width="207dp"
-        android:layout_height="17dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="488dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="153dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/listDrink"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
         android:background="@color/bgBtnHome"
         android:text="Tambah Minuman" />
 </RelativeLayout>
