@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Cart">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_cart">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="100dp"
+       android:orientation="horizontal"
+       android:layout_alignParentBottom="true"
+       android:background="@color/colorBtmCart">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:id="@+id/namaKasir">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Kasir : "
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/txtNamaKasir"
+               android:layout_marginStart="5dp"
+               android:text="Admin"/>
+       </LinearLayout>
+
+       <View
+           android:layout_width="match_parent"
+           android:layout_height="1dp"
+           android:layout_marginBottom="12dp"
+           android:layout_below="@id/namaKasir"
+           android:background="#5d5d5d"
+           android:id="@+id/line"/>
+
+       <TextView
+           android:id="@+id/lblTotal"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Total :"
+           android:textSize="20dp"
+           android:layout_below="@+id/line"
+           android:layout_marginStart="10dp"
+           android:layout_centerVertical="true"/>
+
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="10dp"
+           android:layout_centerVertical="true"
+           android:layout_toEndOf="@+id/lblTotal"
+           android:text="150.000"
+           android:textSize="30dp"
+
+           android:id="@+id/txtHargaTotal"/>
+
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/btnBayar"
+           android:layout_alignParentEnd="true"
+           android:layout_centerVertical="true"
+           android:layout_marginEnd="10dp"
+           android:background="@color/colorToolbar"
+           android:text="Bayar" />
+   </RelativeLayout>
+
+</RelativeLayout>

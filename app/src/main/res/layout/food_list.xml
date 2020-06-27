@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="6dp"
+    app:cardUseCompatPadding="true"
+    android:id="@+id/cv_main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:padding="5dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imgfood"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/icon_home"/>
+
+            <TextView
+                android:id="@+id/txtFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/imgfood"
+                android:layout_marginLeft="80dp"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:text="Hahahahaha"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:id="@+id/txtHarga"
+                android:visibility="invisible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtFood"
+                android:layout_alignLeft="@id/imgfood"
+                android:layout_marginLeft="85dp"
+                android:text="Hahahahaha" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:enabled="true"
+        android:icon="@drawable/icon_home"
+        android:title="@string/menu_btm1"></item>
+
+    <item
+        android:id="@+id/management"
+        android:enabled="true"
+        android:icon="@drawable/fastfood"
+        android:title="@string/menu_btm2"></item>
+    <item
+        android:id="@+id/history"
+        android:enabled="true"
+        android:icon="@drawable/history"
+        android:title="@string/menu_btm3"></item>
+    <item
+        android:id="@+id/setting"
+        android:enabled="true"
+        android:icon="@drawable/setting"
+        android:title="@string/menu_btm4"></item>
+</menu>

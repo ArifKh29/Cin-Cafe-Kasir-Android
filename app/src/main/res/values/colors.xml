@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#fb8c00</color>
+    <color name="colorPrimaryDark">#c25e00</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorToolbar">#fb8c00</color>
+    <color name="colorWhite">#fafafa</color>
+    <color name="colorLogin">#60B63D</color>
+    <color name="colorBtmCart">#e0e0e0</color>
+    <color name="clrLogin">#794A05</color>
+    <color name="clrLogin2">#AA6C13</color>
+    <color name="clrLogin3">#DD8E19</color>
+    <color name="bgColor">#fff9c4</color>
+    <color name="bgToolbar">#e8e4b2</color>
+    <color name="bgBtnHome">#ffe082</color>
+</resources>

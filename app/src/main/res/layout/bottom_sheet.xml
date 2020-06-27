@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="90dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_smiletes"/>
+
+    <TextView
+        android:id="@+id/dtxtNama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:textSize="24sp"
+        android:text="Nama"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/dtxtHarga"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        android:text="Harga"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="#5d5d5d" />
+
+    <RelativeLayout
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnMin"
+            android:onClick="btnmin"
+            android:layout_width="44dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/jumlah"
+            android:background="@color/colorToolbar"
+            android:text="-"
+            android:textColor="@color/colorWhite"
+            android:textSize="25dp" />
+
+        <EditText
+            android:id="@+id/jumlah"
+            android:layout_width="60dp"
+            android:layout_height="70dp"
+            android:text="0"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/btnPlus"
+            android:layout_marginStart="10dp"
+            android:layout_width="44dp"
+            android:layout_height="70dp"
+            android:layout_toEndOf="@+id/jumlah"
+            android:text="+"
+            android:textSize="25dp"
+            android:textColor="@color/colorWhite"
+            android:bottomRightRadius="10dp"
+            android:bottomLeftRadius="10dp"
+            android:topLeftRadius="10dp"
+            android:topRightRadius="10dp"
+            android:background="@color/colorToolbar"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingLeft="10dp"
+            android:text="Total :"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/txtTtlJumlah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_toEndOf="@+id/txtTotal"
+            android:text="0"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textAlignment="textEnd" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#000"
+        android:text="Add to cart"
+        android:textColor="#fff" />
+
+</LinearLayout>
