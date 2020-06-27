@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/bgColor"
     android:layout_height="match_parent"
     tools:context=".UbahPassword">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5dp"
         android:orientation="vertical"
         android:padding="5dp"
         tools:ignore="MissingConstraints">
@@ -17,13 +17,13 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
-            android:src="@drawable/akun"
+            android:src="@drawable/ic_account_circle_black_24dp"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_horizontal_margin"/>
 
         <RelativeLayout
-            android:layout_width="402dp"
-            android:layout_height="45dp"
+            android:layout_width="356dp"
+            android:layout_height="57dp"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             tools:ignore="MissingConstraints">
@@ -33,12 +33,13 @@
                 android:layout_width="340dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
                 android:hint="Username"
                 android:textSize="16dp" />
         </RelativeLayout>
         <RelativeLayout
-            android:layout_width="402dp"
-            android:layout_height="45dp"
+            android:layout_width="356dp"
+            android:layout_height="57dp"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             tools:ignore="MissingConstraints">
@@ -48,12 +49,13 @@
                 android:layout_width="340dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
                 android:hint="Nama"
                 android:textSize="16dp" />
         </RelativeLayout>
         <RelativeLayout
-            android:layout_width="402dp"
-            android:layout_height="45dp"
+            android:layout_width="356dp"
+            android:layout_height="57dp"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="@dimen/activity_horizontal_margin"
             tools:ignore="MissingConstraints">
@@ -64,6 +66,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:hint="Status"
+                android:layout_marginRight="40dp"
                 android:textSize="16dp" />
         </RelativeLayout>
 
@@ -73,6 +76,7 @@
             android:layout_marginLeft="50dp"
             android:layout_width="190dp"
             android:layout_height="50dp"
+            android:background="@color/bgBtnHome"
             android:text="UBAH PROFIL" />
 
     </LinearLayout>

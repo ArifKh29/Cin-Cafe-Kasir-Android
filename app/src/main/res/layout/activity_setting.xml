@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_marginTop="20dp"
+    android:background="@color/bgColor"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="1dp"
@@ -28,7 +29,7 @@
                 android:id="@+id/imgprofil"
                 android:layout_width="60dp"
                 android:layout_height="62dp"
-                android:src="@drawable/profil" />
+                android:src="@drawable/ic_person_black_24dp" />
 
             <TextView
                 android:id="@+id/txtprofil"
@@ -56,7 +57,7 @@
                 android:id="@+id/imgpass"
                 android:layout_width="60dp"
                 android:layout_height="70dp"
-                android:src="@drawable/kunci" />
+                android:src="@drawable/ic_enhanced_encryption_black_24dp" />
 
             <TextView
                 android:id="@+id/txtpass"
@@ -79,7 +80,7 @@
                 android:id="@+id/imgmanage"
                 android:layout_width="60dp"
                 android:layout_height="70dp"
-                android:src="@drawable/manage" />
+                android:src="@drawable/ic_people_black2_24dp" />
 
             <TextView
                 android:id="@+id/manage"
@@ -104,7 +105,7 @@
                 android:id="@+id/imgbackup"
                 android:layout_width="60dp"
                 android:layout_height="70dp"
-                android:src="@drawable/backup"/>
+                android:src="@drawable/ic_settings_backup_restore_black_24dp"/>
 
             <TextView
                 android:id="@+id/backup"
@@ -128,7 +129,7 @@
                 android:id="@+id/imglogout"
                 android:layout_width="60dp"
                 android:layout_height="70dp"
-                android:src="@drawable/logout" />
+                android:src="@drawable/ic_power_settings_new_black_24dp" />
 
             <TextView
                 android:id="@+id/logout"
