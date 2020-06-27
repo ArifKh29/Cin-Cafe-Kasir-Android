@@ -27,4 +27,8 @@ public class Management extends AppCompatActivity {
         Intent intent = new Intent(Management.this,AddMenu.class);
         startActivity(intent);
     }
+    public void tambahMinuman(View view){
+        Intent intent = new Intent(Management.this, TambahMinuman.class );
+        startActivity(intent);
+    }
 }

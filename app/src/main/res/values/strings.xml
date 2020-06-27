@@ -8,4 +8,17 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string-array name="listfood">
+        <item>Pilih Tipe Makanan</item>
+        <item>Food</item>
+        <item>Snack</item>
+        <item>Bakery</item>
+    </string-array>
+    <string-array name="listdrink">
+        <item>Pilih Tipe Minuman</item>
+        <item>Cinnar Espreso</item>
+        <item>Non Coffe</item>
+        <item>Manual Brewing</item>
+        <item>Cinnamonraisin Soda</item>
+    </string-array>
 </resources>
