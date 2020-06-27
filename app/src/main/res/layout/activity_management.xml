@@ -11,6 +11,7 @@
         android:id="@+id/cardFood"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:onClick="manageFood"
         app:cardBackgroundColor="@color/bgBtnHome"
         android:layout_alignParentTop="true">
         <TextView

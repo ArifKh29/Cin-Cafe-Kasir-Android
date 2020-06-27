@@ -132,7 +132,7 @@ public class Coffe extends AppCompatActivity {
                 foodMdl.setHot(cursor.getString(2));
                 foodMdl.setIce(cursor.getString(3));
                 foodMdl.setJenis(cursor.getString(4));
-                foodMdl.setImg(cursor.getBlob(5));
+                foodMdl.setImg(cursor.getBlob(6));
                 foodMdlArrayList.add(foodMdl);
 
             }

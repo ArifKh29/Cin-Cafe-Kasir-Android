@@ -42,14 +42,19 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
     public void onBindViewHolder(FoodViewHolder holder, final int position) {
         holder.txtFood.setText(dataList.get(position).getNama());
         holder.txtHarga.setText(dataList.get(position).getHarga());
-//        Bitmap cek = BitmapFactory.decodeByteArray(dataList.get(position).getImg(),0,dataList.get(position).getImg().length);
-//        System.out.println("asasas"+BitmapFactory.decodeByteArray(dataList.get(position).getImg(),0,dataList.get(position).getImg().length));
-//        if(cek.equals(null)){
-//        holder.img.setImageResource(R.drawable.def_menu);
-//        }
-//        if(dataList.get(position).getImg().length.  )) {
-//            holder.img.setImageBitmap(BitmapFactory.decodeByteArray(dataList.get(position).getImg(),0,dataList.get(position).getImg().length ));
-//        }
+        try{
+            Bitmap cek = BitmapFactory.decodeByteArray(dataList.get(position).getImg(),0,dataList.get(position).getImg().length);
+            System.out.println("asasas"+BitmapFactory.decodeByteArray(dataList.get(position).getImg(),0,dataList.get(position).getImg().length));
+//            if(cek.equals(null)){
+//                holder.img.setImageResource(R.drawable.def_menu);
+//            }
+//            if(dataList.get(position).getImg().length  )) {
+                holder.img.setImageBitmap(BitmapFactory.decodeByteArray(dataList.get(position).getImg(),0,dataList.get(position).getImg().length ));
+//            }
+        }catch (Exception ex){
+            holder.img.setImageResource(R.drawable.def_menu);
+        }
+
 
     }
 

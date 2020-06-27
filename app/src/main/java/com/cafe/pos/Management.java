@@ -27,4 +27,9 @@ public class Management extends AppCompatActivity {
         Intent intent = new Intent(Management.this,AddMenu.class);
         startActivity(intent);
     }
+
+    public void manageFood(View view) {
+        Intent intent = new Intent(Management.this,ManageFood.class);
+        startActivity(intent);
+    }
 }

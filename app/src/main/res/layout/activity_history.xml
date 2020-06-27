@@ -11,8 +11,10 @@
         <!--android:layout_height="match_parent">-->
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="800dp"
-            android:id="@+id/rv_cart"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_history"
+            android:layout_above="@+id/btmBar"
+            android:layout_alignParentTop="true"
             >
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -20,7 +22,7 @@
 
 
     <RelativeLayout
-
+        android:id="@+id/btmBar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"

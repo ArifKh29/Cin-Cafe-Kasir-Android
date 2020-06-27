@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:hint="Jumlah Uang"
             android:inputType="number"
+            android:text="0"
             android:id="@+id/inputBayar"/>
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -197,7 +197,7 @@ public class DataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String idtrx = genID();
         System.out.println("alalala"+countCart());
-        String selectQuery = "SELECT SUM(harga) FROM cart WHERE id_trx='"+idtrx+"'";
+        String selectQuery = "SELECT SUM(subtotal) FROM cart WHERE id_trx='"+idtrx+"'";
         Cursor cursor = db.rawQuery(selectQuery, null);
         int value = 0;
         int count = cursor.getCount();
@@ -254,6 +254,19 @@ public class DataHelper extends SQLiteOpenHelper {
 
         //if user password does not matches or there is no record with that email then return @false
         return null;
+    }
+
+    public void hpsCart(String id_cart) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM cart WHERE id_cart='"+id_cart+"'";
+        db.execSQL(query);
+
+    }
+
+    public void ubahCart(String id_cart, String jml, String subtotal) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE cart SET jumlah='"+jml+"', subtotal='"+subtotal+"' WHERE id_cart='"+id_cart+"'";
+        db.execSQL(query);
     }
 }
 

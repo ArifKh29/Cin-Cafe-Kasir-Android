@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Home">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/AppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:elevation="4dp"
+        android:background="@color/bgToolbar"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="341dp"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.SearchView
+                android:layout_width="300dp"
+                android:layout_height="wrap_content" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+
+                android:layout_marginStart="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cart_color"
+                android:onClick="btnCart"/>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--<TextView-->
+    <!--android:layout_below="@+id/AppBar"-->
+    <!--android:id="@+id/txtDaftardaun"-->
+    <!--android:textSize="20dp"-->
+    <!--android:textStyle="bold|italic"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Daftar Menu Makanan"/>-->
+    <!--<View-->
+    <!--android:layout_below="@+id/AppBar"-->
+    <!--android:id="@+id/garis"-->
+    <!--android:paddingBottom="5dp"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0.5dp"-->
+    <!--android:layout_marginTop="3dp"-->
+    <!--android:layout_marginBottom="12dp"-->
+    <!--android:background="#5d5d5d" />-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/AppBar"
+        android:nestedScrollingEnabled="false"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_food"
+        android:background="@color/bgColor">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <!--<include-->
+
+    <!--layout="@layout/bottom_sheet"/>-->
+
+    <!--<androidx.recyclerview.widget.RecyclerView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:id="@+id/rv_food">-->
+    <!--</androidx.recyclerview.widget.RecyclerView>-->
+</RelativeLayout>
