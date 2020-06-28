@@ -37,4 +37,14 @@ public class Management extends AppCompatActivity {
         Intent intent = new Intent(Management.this, TambahMinuman.class );
         startActivity(intent);
     }
+
+//    public void manageDrink(View view) {
+//        Intent j = new Intent(Management.this, ManageDrink.class);
+//        startActivity(j);
+//    }
+
+    public void manageMinum(View view) {
+        Intent intent = new Intent(Management.this, ManageDrink.class );
+        startActivity(intent);
+    }
 }

@@ -25,5 +25,10 @@ public class Setting extends AppCompatActivity {
         Intent i = new Intent(Setting.this, Login.class);
         startActivity(i);
     }
+
+    public void manageUser(View view) {
+        Intent i = new Intent(Setting.this, ManageUser.class);
+        startActivity(i);
+    }
 }
 

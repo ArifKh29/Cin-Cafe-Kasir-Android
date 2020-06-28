@@ -84,9 +84,12 @@ public class EditFood extends AppCompatActivity {
                     String nama = namaMenu.getText().toString();
                     String harga = hargaMenu.getText().toString();
                     byte[] image = imageViewTobyte(imageView);
-                    boolean update = dataHelper.updateMenu(id_food, nama, harga, image);
+                    boolean update = dataHelper.updateMenu(id_food, nama, harga, image, jenis);
                     if(update){
                         Toast("Data Masuk");
+                        Intent intent = new Intent(EditFood.this, ManageFood.class);
+                        startActivity(intent);
+                        finish();
                     }
                     else {
                         Toast("Data Gagal");

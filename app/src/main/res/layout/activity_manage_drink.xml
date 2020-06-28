@@ -22,14 +22,12 @@
             <TextView
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:text="Manage Makanan"
+                android:text="Manage Minuman"
                 android:textColor="@color/clrLogin"
                 android:textSize="20dp"
                 android:textStyle="bold"/>
 
-
             <!--<androidx.appcompat.widget.AppCompatImageView-->
-
                 <!--android:layout_marginStart="5dp"-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
@@ -61,7 +59,7 @@
         android:nestedScrollingEnabled="false"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_food"
+        android:id="@+id/rv_drink"
         android:background="@color/bgColor">
 
     </androidx.recyclerview.widget.RecyclerView>

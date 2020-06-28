@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_PRIVILEGED" />
 
     <application
         android:name=".MyApplication"
@@ -16,9 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesNonSdkApi="true">
-        <activity android:name=".EditFood"></activity>
+        <activity android:name=".Print"></activity>
+        <activity android:name=".DeviceList" />
+        <activity android:name=".AddUser" />
+        <activity android:name=".ManageDrink" />
+        <activity android:name=".EditFood" />
         <activity android:name=".ManageFood" />
-        <activity android:name=".TambahMinuman"></activity>
+        <activity android:name=".TambahMinuman" />
         <activity android:name=".UbahPassword" />
         <activity android:name=".Profil" />
         <activity android:name=".Management" />
@@ -38,6 +45,8 @@
         <activity android:name=".Login" />
         <activity android:name=".Home" />
         <activity android:name=".Coffe" />
+        <activity android:name=".EditDrink" />
+        <activity android:name=".ManageUser" />
     </application>
 
 </manifest>

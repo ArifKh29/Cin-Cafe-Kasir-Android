@@ -1,40 +1,20 @@
 package com.cafe.pos;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ManageFood extends AppCompatActivity {
+public class ManageDrink extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FoodAdapter adapter;
     private ArrayList<FoodMdl> foodMdlArrayList;
@@ -46,8 +26,8 @@ public class ManageFood extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_food);
-        recyclerView = (RecyclerView) findViewById(R.id.rv_food);
+        setContentView(R.layout.activity_manage_drink);
+        recyclerView = (RecyclerView) findViewById(R.id.rv_drink);
         db = new DataHelper(this);
         foodMdlArrayList = new ArrayList<>();
 
@@ -59,7 +39,7 @@ public class ManageFood extends AppCompatActivity {
             @Override
             public void onClick(View v, int position) {
                 String id_menu = foodMdlArrayList.get(position).getId();
-                Intent intent = new Intent(ManageFood.this, EditFood.class);
+                Intent intent = new Intent(ManageDrink.this, EditDrink.class);
                 intent.putExtra(ID_MENU,id_menu);
                 startActivity(intent);
                 //Toast.makeText(getApplicationContext(), (CharSequence) foodMdlArrayList.get(position).getNama(),Toast.LENGTH_LONG).show();
@@ -124,7 +104,7 @@ public class ManageFood extends AppCompatActivity {
     }
 
     void addData(){
-        Cursor cursor = db.showMenu();
+        Cursor cursor = db.showCoffe();
         if (cursor.getCount()==0){
             Toast.makeText(getApplicationContext(), "NO DATA", Toast.LENGTH_LONG).show();
         }else {
@@ -132,9 +112,10 @@ public class ManageFood extends AppCompatActivity {
                 FoodMdl foodMdl = new FoodMdl();
                 foodMdl.setId(cursor.getString(0));
                 foodMdl.setNama(cursor.getString(1));
-                foodMdl.setHarga(cursor.getString(2));
-                foodMdl.setJenis(cursor.getString(3));
-                foodMdl.setImg(cursor.getBlob(5));
+                foodMdl.setHot(cursor.getString(2));
+                foodMdl.setIce(cursor.getString(3));
+                foodMdl.setJenis(cursor.getString(4));
+                foodMdl.setImg(cursor.getBlob(6));
                 foodMdlArrayList.add(foodMdl);
 
             }

@@ -11,11 +11,11 @@ import android.util.Log;
 public class DataHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="pos.db";
     private static final int DATABASE_VERSION= 1;
-    private static final String CREATE_TABLE1="CREATE TABLE menu(ID INTEGER PRIMARY KEY AUTOINCREMENT, nama_menu VARCHAR(255), harga INTEGER(15), jenis CHAR(20), `status` varchar(7), `image` blob)";
-    private static final String CREATE_TABLE2="CREATE TABLE cart(id_cart INTEGER PRIMARY KEY AUTOINCREMENT, id_trx VARCHAR(7), nama_pesanan VURCHAR(255), harga INTEGER(15), ket VARCHAR(5),  jumlah INTEGER(3), subtotal INTEGER(10))";
-    private static final String CREATE_TABLE5="CREATE TABLE `drink` ( `id` int(11) NOT NULL,`nama_drink` varchar(70) NOT NULL, `hot_price` int(12) NOT NULL,`ice_price` int(12) NOT NULL,`jenis` varchar(50),`status` varchar(7) NOT NULL, `image` varchar(40))";
+    private static final String CREATE_TABLE1="CREATE TABLE menu (ID INTEGER PRIMARY KEY AUTOINCREMENT, nama_menu VARCHAR(255), harga INTEGER(15), jenis CHAR(20), `status` varchar(7), `image` blob)";
+    private static final String CREATE_TABLE2="CREATE TABLE cart (id_cart INTEGER PRIMARY KEY AUTOINCREMENT, id_trx VARCHAR(7), nama_pesanan VURCHAR(255), harga INTEGER(15), ket VARCHAR(5),  jumlah INTEGER(3), subtotal INTEGER(10))";
+    private static final String CREATE_TABLE5="CREATE TABLE `drink` ( `id` INTEGER PRIMARY KEY AUTOINCREMENT,`nama_drink` varchar(70) NOT NULL, `hot_price` int(12) NOT NULL,`ice_price` int(12) NOT NULL,`jenis` varchar(50),`status` varchar(7), `image` varchar(40))";
     private static final String CREATE_TABLE3="CREATE TABLE transaksi(id_trx VARCHAR(7) PRIMARY KEY, id_user VARCHAR(7), tanggal DATE, total INTEGER, bayar INTEGER, kembalian INTEGER)";
-    private static final String CREATE_TABLE4="CREATE TABLE user(id_user VARCHAR(7), username VARCHAR(10), nama CHAR, password VARCHAR(12), status CHAR(5))";
+    private static final String CREATE_TABLE4="CREATE TABLE user(id_user INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(10), nama CHAR, password VARCHAR(12), status CHAR(5))";
     //private static final String DROP_TABLE="DROP TABLE  IF EXISTS "+TABLE_NAME;
     public static final String KEY_ID = "id_user";
 
@@ -43,7 +43,7 @@ public class DataHelper extends SQLiteOpenHelper {
             db.execSQL(CREATE_TABLE3);
             db.execSQL(CREATE_TABLE4);
             db.execSQL(CREATE_TABLE5);
-            String create_admin = "INSERT INTO user (id_user, username, nama, password, status) VALUES ('US0001', 'admin','Admin','admin','admin'),('US0002', 'user','user','user','user')";
+            String create_admin = "INSERT INTO user ( username, nama, password, status) VALUES ( 'admin','Admin','admin','admin'),( 'user','user','user','user')";
             db.execSQL(create_admin);
 
 //            Massage.message(context,"onCreate dipanggil");
@@ -226,13 +226,14 @@ public class DataHelper extends SQLiteOpenHelper {
 
 
 
-    public boolean addMenu(String nama, String harga, byte[] image) {
+    public boolean addMenu(String nama, String harga,String jenis, byte[] image) {
         SQLiteDatabase db = this.getWritableDatabase();
         //String addmenu = "INSERT INTO menu (nama_menu, harga, image) VALUES ('"+nama+"', '"+harga+"', '"+image+"')";
         ContentValues contentValues = new ContentValues();
         contentValues.put("nama_menu", nama);
         contentValues.put("harga", harga);
         contentValues.put("image", image);
+        contentValues.put("jenis", jenis);
         long result = db.insert("menu",null,contentValues);
         if (result == -1){
             return false;
@@ -242,13 +243,14 @@ public class DataHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean addMinum(String namaminum, String hargahot,String hargaice, byte[] image) {
+    public boolean addMinum(String namaminum, String hargahot,String hargaice, byte[] image, String jenis) {
         SQLiteDatabase db = this.getWritableDatabase();
         //String addmenu = "INSERT INTO menu (nama_menu, harga, image) VALUES ('"+nama+"', '"+harga+"', '"+image+"')";
         ContentValues contentValues = new ContentValues();
         contentValues.put("nama_drink", namaminum);
         contentValues.put("hot_price", hargahot);
         contentValues.put("ice_price", hargaice);
+        contentValues.put("jenis", jenis);
         contentValues.put("image", image);
         long result = db.insert("drink",null,contentValues);
         if (result == -1){
@@ -293,13 +295,14 @@ public class DataHelper extends SQLiteOpenHelper {
         db.execSQL(query);
     }
 
-    public boolean updateMenu(String id_food, String nama, String harga, byte[] image) {
+    public boolean updateMenu(String id_food, String nama, String harga, byte[] image, String jenis) {
         String strFilter = "ID=" + id_food;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("nama_menu", nama);
         contentValues.put("harga", harga);
         contentValues.put("image", image);
+        contentValues.put("jenis", jenis);
         long result = db.update("menu",contentValues, strFilter, null);
         if (result == -1){
             return false;
@@ -309,6 +312,83 @@ public class DataHelper extends SQLiteOpenHelper {
         }
 //        String update = "UPDATE menu SET nama_menu='"+nama+"', harga='"+harga+"', image='"+image+"' WHERE ID='"+id_food+"'";
 //        db.execSQL(update);
+    }
+
+    public Cursor getminum(String id_minum) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM drink WHERE ID='"+id_minum+"'",null);
+        return cursor;
+    }
+
+    public boolean updateMinum(String id_minum, String nama, String hargaIce, String hargaHot, byte[] image, String jenis) {
+        String strFilter = "ID=" + id_minum;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nama_drink", nama);
+        contentValues.put("hot_price", hargaHot);
+        contentValues.put("ice_price", hargaIce);
+        contentValues.put("image", image);
+        contentValues.put("jenis", jenis);
+        long result = db.update("drink",contentValues, strFilter, null);
+        if (result == -1){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public Cursor showTransaksi() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT id_trx,nama,tanggal,total,bayar,kembalian FROM transaksi JOIN user ON transaksi.id_user=user.id_user",null);
+        return cursor;
+    }
+
+    public boolean updateProfil(String id, String user, String nama){
+        String strFilter = "id_user='" + id+"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("nama", nama);
+        contentValues.put("username", user);
+        long result = db.update("user",contentValues, strFilter, null);
+        if (result == -1){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public boolean updatePass(String id, String passwd) {
+        String strFilter = "id_user='" + id+"'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("password", passwd);
+        long result = db.update("user",contentValues, strFilter, null);
+        if (result == -1){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    public Cursor getUser() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM user WHERE status='user'",null);
+        return cursor;
+    }
+
+    public void hpsUser(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM user WHERE id_user='"+id+"'";
+        db.execSQL(query);
+    }
+
+    public void addUser(String nama, String username, String pass) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "INSERT INTO user (username, nama, password, status) VALUES ('"+username+"', '"+nama+"', '"+pass+"', 'user')";
+        db.execSQL(query);
     }
 }
 

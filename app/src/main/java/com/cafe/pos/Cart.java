@@ -257,4 +257,6 @@ public class Cart extends AppCompatActivity {
 //        cartMdlList.add(new CartMdl("Aham Siswana", "1214378098", "098758124","asasa"));
     }
 
+    public void addUser(View view) {
+    }
 }

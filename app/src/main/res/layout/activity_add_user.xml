@@ -88,16 +88,14 @@
                 android:id="@+id/tStatus"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
-                android:text="Status       :"/>
+                android:text="Password :"/>
             <EditText
                 android:layout_toRightOf="@+id/tStatus"
                 android:layout_alignParentRight="true"
-                android:id="@+id/status"
+                android:id="@+id/tPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-                android:hint="Status"
-                android:editable="false"
+                android:hint="Password"
                 android:layout_marginRight="20dp"
                 android:textSize="16dp" />
         </RelativeLayout>
@@ -109,7 +107,7 @@
             android:layout_width="190dp"
             android:layout_height="50dp"
             android:background="@color/bgBtnHome"
-            android:text="UBAH PROFIL" />
+            android:text="Simpan Data" />
 
     </LinearLayout>
 

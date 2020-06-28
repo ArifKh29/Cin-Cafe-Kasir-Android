@@ -1,55 +1,57 @@
 package com.cafe.pos;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import static com.cafe.pos.Login.MyPREFERENCES;
 
-public class History extends AppCompatActivity {
+public class ManageUser extends AppCompatActivity {
     RecyclerView recyclerView;
-    ArrayList<HistoryMdl> cartMdlList;
-    private HistoryAdapter adapter;
-    HistoryAdapter.RecyclerViewListener listener;
+    ArrayList<UserMdl> userMdlList;
+    private UserAdapter adapter;
+    UserAdapter.RecyclerViewListener listener;
     DataHelper dataHelper;
     TextView total, kembali, namaKasir;
     private int hari, bulan, tahun;
-    Button bayar;
+    Button btnAdd;
     SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history);
-        cartMdlList = new ArrayList<>();
-        recyclerView = (RecyclerView) findViewById(R.id.rv_history);
+        setContentView(R.layout.activity_manage_user);
+        userMdlList = new ArrayList<>();
+        recyclerView = (RecyclerView) findViewById(R.id.rv_user);
         dataHelper = new DataHelper(this);
         addData();
-        adapter = new HistoryAdapter(getApplicationContext(),cartMdlList, listener);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(History.this);
+        adapter = new UserAdapter(getApplicationContext(),userMdlList, listener);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ManageUser.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         namaKasir = (TextView) findViewById(R.id.txtNamaKasir);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        btnAdd = findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ManageUser.this,AddUser.class);
+                startActivity(intent);
+            }
+        });
 //        namaKasir.setText(sharedPreferences.getString("nama",null));
 //        if(dataHelper.countCart() == 0){
 //            Toast.makeText(this,"NULL",Toast.LENGTH_LONG).show();
@@ -148,11 +150,33 @@ public class History extends AppCompatActivity {
 
 
     }
-//    private void setOnClickListener() {
-//        listener = new CartAdapter.RecyclerViewListener() {
-//            @Override
-//            public void onClick(View v, final int position) {
-//                //Toast.makeText(getApplicationContext(), (CharSequence) foodMdlArrayList.get(position).getNama(),Toast.LENGTH_LONG).show();
+    private void setOnClickListener() {
+        listener = new UserAdapter.RecyclerViewListener() {
+            @Override
+            public void onClick(View v, final int position) {
+                final String id = userMdlList.get(position).getIduser();
+                final AlertDialog.Builder builder = new AlertDialog.Builder(ManageUser.this);
+                builder.setTitle("Hapus User");
+                builder.setMessage("Anda yakin akan menghapus user ini?");
+                builder.setCancelable(false);
+                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dataHelper.hpsUser(id);
+                        Toast("User Berhasil Dihapus");
+                    }
+                });
+
+                builder.setNegativeButton("Tidak", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+
+                builder.show();
+
+                //Toast.makeText(getApplicationContext(), (CharSequence) foodMdlArrayList.get(position).getNama(),Toast.LENGTH_LONG).show();
 //                final Dialog dialog = new Dialog(History.this);
 //                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //                dialog.setContentView(R.layout.dialog_cart);
@@ -220,33 +244,33 @@ public class History extends AppCompatActivity {
 //                        finish();
 //                    }
 //                });
-//
-//
-//
-//            }
-//        };
-//    }
+
+
+
+            }
+        };
+    }
 
     void addData(){
 
-        Cursor cursor = dataHelper.showTransaksi();
+        Cursor cursor = dataHelper.getUser();
         if (cursor.getCount()==0){
             Toast.makeText(getApplicationContext(), "NO DATA", Toast.LENGTH_LONG).show();
         }else {
             int total = 0;
             while (cursor.moveToNext()){
-                HistoryMdl historyMdl = new HistoryMdl();
-                historyMdl.setIdtrx(cursor.getString(0));
-                historyMdl.setNama(cursor.getString(1));
-                historyMdl.setTanggal(cursor.getString(2));
-                historyMdl.setJumlah(cursor.getString(3));
+                UserMdl userMdl = new UserMdl();
+                userMdl.setIduser(cursor.getString(0));
+                userMdl.setUsername(cursor.getString(1));
+                userMdl.setNama(cursor.getString(2));
+                userMdl.setStatus(cursor.getString(4));
                 //historyMdl.setJumlah(cursor.getString(5));
 
-                cartMdlList.add(historyMdl);
+                userMdlList.add(userMdl);
             }
-//            setOnClickListener();
+            setOnClickListener();
             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-            adapter = new HistoryAdapter(getApplicationContext(), cartMdlList, listener);
+            adapter = new UserAdapter(getApplicationContext(), userMdlList, listener);
             recyclerView.setAdapter(adapter);
         }
 
@@ -254,6 +278,10 @@ public class History extends AppCompatActivity {
 //        cartMdlList.add(new CartMdl("Fadly Yonk", "1214234560", "987654321","aasasas"));
 //        cartMdlList.add(new CartMdl("Ariyandi Nugraha", "1214230345", "987648765","asasas"));
 //        cartMdlList.add(new CartMdl("Aham Siswana", "1214378098", "098758124","asasa"));
+    }
+
+    private void Toast(String s){
+        Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
 
 }
