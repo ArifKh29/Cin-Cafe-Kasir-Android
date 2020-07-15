@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,12 +16,25 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -32,14 +46,22 @@ public class History extends AppCompatActivity {
     private HistoryAdapter adapter;
     HistoryAdapter.RecyclerViewListener listener;
     DataHelper dataHelper;
-    TextView total, kembali, namaKasir;
+    TextView total, kembali, namaKasir, txtTglAwal, txtTglAkhir;
     private int hari, bulan, tahun;
-    Button bayar;
+    Button bayar, tglAwal, tglAkhir, buatExcel;
     SharedPreferences sharedPreferences;
+    Button btnOpenDatePicker;
+    Calendar myCalendar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        buatExcel = findViewById(R.id.buatExcel);
+        tglAwal = findViewById(R.id.tglAwal);
+        tglAkhir = findViewById(R.id.tglAkhir);
+        buatExcel = findViewById(R.id.buatExcel);
+        txtTglAwal = findViewById(R.id.txtTglAwal);
+        txtTglAkhir = findViewById(R.id.txtTglAkhir);
         cartMdlList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.rv_history);
         dataHelper = new DataHelper(this);
@@ -50,6 +72,154 @@ public class History extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         namaKasir = (TextView) findViewById(R.id.txtNamaKasir);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        myCalendar = Calendar.getInstance();
+        tglAwal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    new DatePickerDialog(History.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, month);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        String formatTanggal = "dd-MM-yyyy";
+                        SimpleDateFormat sdf = new SimpleDateFormat(formatTanggal);
+                        txtTglAwal.setText(sdf.format(myCalendar.getTime()));
+                    }
+                },
+                        myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        tglAkhir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(History.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, month);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        String formatTanggal = "dd-MM-yyyy";
+                        SimpleDateFormat sdf = new SimpleDateFormat(formatTanggal);
+                        txtTglAkhir.setText(sdf.format(myCalendar.getTime()));
+                    }
+                },
+                        myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        buatExcel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tglawal = txtTglAwal.getText().toString();
+                String tglakhir = txtTglAkhir.getText().toString();
+                Cursor cursor = dataHelper.getExcelData(tglawal,tglakhir);
+                Workbook wb = new HSSFWorkbook();
+                Cell cell = null;
+                CellStyle cellStyle = wb.createCellStyle();
+                cellStyle.setFillForegroundColor(HSSFColor.LIGHT_BLUE.index);
+
+                Sheet sheet=null;
+                sheet = wb.createSheet("Laporan Transaksi");
+
+                Row row = sheet.createRow(0);
+                cell = row.createCell(0);
+                cell.setCellValue("No");
+                cell.setCellStyle(cellStyle);
+
+                cell = row.createCell(1);
+                cell.setCellValue("ID Transaksi");
+                cell.setCellStyle(cellStyle);
+
+                cell = row.createCell(2);
+                cell.setCellValue("Nama Kasir");
+                cell.setCellStyle(cellStyle);
+
+                cell = row.createCell(3);
+                cell.setCellValue("Tanggal");
+                cell.setCellStyle(cellStyle);
+
+                cell = row.createCell(4);
+                cell.setCellValue("Total");
+                cell.setCellStyle(cellStyle);
+
+                cell = row.createCell(5);
+                cell.setCellValue("Bayar");
+                cell.setCellStyle(cellStyle);
+
+                cell = row.createCell(6);
+                cell.setCellValue("Kembalian");
+                cell.setCellStyle(cellStyle);
+
+                int no=1;
+                while (cursor.moveToNext()){
+                    Row isi = sheet.createRow(no);
+                    cell = isi.createCell(0);
+                    cell.setCellValue(no);
+                    cell.setCellStyle(cellStyle);
+
+                    cell = isi.createCell(1);
+                    cell.setCellValue(cursor.getString(0));
+                    cell.setCellStyle(cellStyle);
+
+                    cell = isi.createCell(2);
+                    cell.setCellValue(cursor.getString(1));
+                    cell.setCellStyle(cellStyle);
+
+                    cell = isi.createCell(3);
+                    cell.setCellValue(cursor.getString(2));
+                    cell.setCellStyle(cellStyle);
+
+                    cell = isi.createCell(4);
+                    cell.setCellValue(Integer.parseInt(cursor.getString(3)));
+                    cell.setCellStyle(cellStyle);
+
+                    cell = isi.createCell(5);
+                    cell.setCellValue(Integer.parseInt(cursor.getString(4)));
+                    cell.setCellStyle(cellStyle);
+
+                    cell = isi.createCell(6);
+                    cell.setCellValue(Integer.parseInt(cursor.getString(5)));
+                    cell.setCellStyle(cellStyle);
+
+                    no++;
+                }
+                int baru = no++;
+                Row total = sheet.createRow(baru);
+//                sheet.addMergedRegion(CellRangeAddress.valueOf("A"+baru+":D"+baru));
+//                cell.setCellValue("GRAND TOTAL");
+//                cell.setCellStyle(cellStyle);
+
+                cell = total.createCell(4);
+                cell.setCellFormula("SUM(E2:E"+(no-1)+")");
+                cell.setCellStyle(cellStyle);
+
+                cell = total.createCell(5);
+                cell.setCellFormula("SUM(F2:F"+(no-1)+")");
+                cell.setCellStyle(cellStyle);
+
+                cell = total.createCell(6
+                );
+                cell.setCellFormula("SUM(G2:G"+(no-1)+")");
+                cell.setCellStyle(cellStyle);
+
+
+                File file = new File(getExternalFilesDir(null), "Laporan.xls");
+                FileOutputStream outputStream = null;
+
+                    try {
+                        outputStream=new FileOutputStream(file);
+                        wb.write(outputStream);
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+            }
+        });
 //        namaKasir.setText(sharedPreferences.getString("nama",null));
 //        if(dataHelper.countCart() == 0){
 //            Toast.makeText(this,"NULL",Toast.LENGTH_LONG).show();

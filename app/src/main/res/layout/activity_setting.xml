@@ -9,8 +9,8 @@
     app:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:layout_width="403dp"
-        android:layout_height="332dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:orientation="vertical"
         android:padding="5dp"
@@ -115,6 +115,30 @@
                 android:layout_centerInParent="true"
                 android:layout_marginLeft="80dp"
                 android:text="Backup dan Restore"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="382dp"
+            android:layout_height="46dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:onClick="btSetting">
+
+            <ImageView
+                android:id="@+id/imgbt"
+                android:layout_width="60dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_print_black_24dp" />
+
+            <TextView
+                android:id="@+id/bt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/imgbt"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="80dp"
+                android:text="Print Setting"
                 android:textSize="20dp"
                 android:textStyle="bold" />
         </RelativeLayout>

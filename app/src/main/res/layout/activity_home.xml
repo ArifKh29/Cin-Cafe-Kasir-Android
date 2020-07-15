@@ -143,14 +143,15 @@
         android:orientation="horizontal"
         android:weightSum="1"
         android:layout_below="@id/Line1"
-        android:gravity="center_horizontal">>
+        android:gravity="center_horizontal"
+        >
 
         <androidx.cardview.widget.CardView
             android:id="@+id/btnNonCoffe"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_margin="10dp"
-
+            android:onClick="nonCoffe"
             android:padding="5dp"
             android:layout_weight="0.33"
             android:clickable="true"
@@ -193,7 +194,7 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_margin="10dp"
-
+            android:onClick="snack"
             android:padding="5dp"
             android:layout_weight="0.33"
             android:clickable="true"

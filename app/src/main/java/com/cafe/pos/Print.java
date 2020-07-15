@@ -68,6 +68,7 @@ public class Print extends Activity {
                 try {
                     findBT();
                     openBT();
+                    sendData();
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -91,10 +92,39 @@ public class Print extends Activity {
         try {
 
             // the text typed by the user
-            String msg = myTextbox.getText().toString();
-            msg += "\n";
+            String BILL = "";
 
-            mmOutputStream.write(msg.getBytes());
+            BILL = "                   XXXX MART    \n"
+                    + "                   XX.AA.BB.CC.     \n " +
+                    "                 NO 25 ABC ABCDE    \n" +
+                    "                  XXXXX YYYYYY      \n" +
+                    "                   MMM 590019091      \n";
+            BILL = BILL
+                    + "-----------------------------------------------\n";
+
+
+            BILL = BILL + String.format("%1$-10s %2$10s %3$11s %4$10s", "Item", "Qty", "Rate", "Totel");
+            BILL = BILL + "\n";
+            BILL = BILL
+                    + "-----------------------------------------------";
+            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-001", "5", "10", "50.00");
+            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-002", "10", "5", "50.00");
+            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-003", "20", "10", "200.00");
+            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-004", "50", "10", "500.00");
+
+            BILL = BILL
+                    + "\n-----------------------------------------------";
+            BILL = BILL + "\n\n ";
+
+            BILL = BILL + "                   Total Qty:" + "      " + "85" + "\n";
+            BILL = BILL + "                   Total Value:" + "     " + "700.00" + "\n";
+
+            BILL = BILL
+                    + "-----------------------------------------------\n";
+            BILL = BILL + "\n\n ";
+
+            mmOutputStream.write(BILL.getBytes());
+           //            mmOutputStream.write(msg.getBytes());
 
             // tell the user data were sent
             myLabel.setText("Data sent.");

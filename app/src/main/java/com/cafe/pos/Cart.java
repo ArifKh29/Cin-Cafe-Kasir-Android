@@ -5,11 +5,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothSocket;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -21,10 +25,16 @@ import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Set;
+import java.util.UUID;
 
 import static com.cafe.pos.Login.MyPREFERENCES;
+import static com.cafe.pos.btSetting.BTPREFERENCES;
 
 public class Cart extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -35,7 +45,21 @@ public class Cart extends AppCompatActivity {
     TextView total, kembali, namaKasir;
     private int hari, bulan, tahun;
     Button bayar;
-    SharedPreferences sharedPreferences;
+//    String idtrx;
+    SharedPreferences sharedPreferences, btpreferences;
+    // android built in classes for bluetooth operations
+    BluetoothAdapter mBluetoothAdapter;
+    BluetoothSocket mmSocket;
+    BluetoothDevice mmDevice;
+
+    // needed for communication to bluetooth device / network
+    OutputStream mmOutputStream;
+    InputStream mmInputStream;
+    Thread workerThread;
+
+    byte[] readBuffer;
+    int readBufferPosition;
+    volatile boolean stopWorker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +68,14 @@ public class Cart extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.rv_cart);
         dataHelper = new DataHelper(this);
         addData();
+        final String idtrx = dataHelper.genID();
         adapter = new CartAdapter(getApplicationContext(),cartMdlList, listener);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(Cart.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         namaKasir = (TextView) findViewById(R.id.txtNamaKasir);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        btpreferences = getSharedPreferences(BTPREFERENCES, Context.MODE_PRIVATE);
         namaKasir.setText(sharedPreferences.getString("nama",null));
         if(dataHelper.countCart() == 0){
             Toast.makeText(this,"NULL",Toast.LENGTH_LONG).show();
@@ -112,6 +138,7 @@ public class Cart extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             String iduser = sharedPreferences.getString("id_user", null);
+                            String namakasir = sharedPreferences.getString("nama", null);
                             String kembalian = kembali.getText().toString();
                             String bayar = inputBayar.getText().toString();
                             Calendar calendar = Calendar.getInstance();
@@ -127,6 +154,10 @@ public class Cart extends AppCompatActivity {
                                         dataHelper.addTransaksi(iduser,tgl,hasilTotal,bayar,kembalian);
                                         Intent home = new Intent(Cart.this,Home.class);
                                         startActivity(home);
+                                            findBT();
+                                            openBT();
+                                            sendData(tgl,namakasir, idtrx, hasilTotal, bayar, kembalian);
+
                                         Toast.makeText(Cart.this,"Berhasil DiProses", Toast.LENGTH_SHORT).show();
                                     }
                                     catch (Exception ex){
@@ -258,5 +289,191 @@ public class Cart extends AppCompatActivity {
     }
 
     public void addUser(View view) {
+    }
+
+    void sendData(String tgl, String namakasir, String idtrx, String hasilTotal, String bayar, String kembalian) throws IOException {
+        try {
+
+            Cursor cursor = dataHelper.showCartStruk(idtrx);
+
+//            System.out.println(idtrx);
+//            TextView getTotal = findViewById(R.id.txtHargaTotal);
+
+            // the text typed by the user
+
+            String BILL = "";
+
+            BILL =  "              CINNAR COFFE & Bakery    \n" +
+                    "           Jl. Bumi Mandiri Wirokerten     \n " +
+                    "                 NO 25 ABC ABCDE    \n" +
+                    "                   XXXXX YYYYYY      \n" +
+                    "                   MMM 590019091      \n";
+            BILL = BILL + "-----------------------------------------------";
+//            BILL = BILL + "\n" + "No Transaksi"+ " : ";
+//            BILL = BILL + "\n" + "Tanggal     "+ " : "+tgl;
+//            BILL = BILL + "\n" + "Kasir       "+ " : "+namakasir;
+
+            BILL = BILL + "\n" + String.format("%1$-15s %2$-3s", "No Transaksi", " : ")+idtrx;
+            BILL = BILL + "\n" + String.format("%1$-15s %2$-3s", "Tanggal", " : ")+tgl;
+            BILL = BILL + "\n" + String.format("%1$-15s %2$-3s", "Kasir", " : ")+namakasir;
+            BILL = BILL +"\n";
+            BILL = BILL + "-----------------------------------------------";
+            BILL = BILL +"\n";
+            while (cursor.moveToNext()) {
+                String nama = cursor.getString(2);
+                BILL = BILL + "\n " + String.format("%1$-10s", nama);
+                BILL = BILL + "\n " + String.format("%1$-5s %2$10s %3$15s %4$10s", "", cursor.getString(4), cursor.getString(5), cursor.getString(3));
+            }
+
+            BILL = BILL +"\n";
+            BILL = BILL + "-----------------------------------------------";
+            BILL = BILL + "\n\n";
+
+            BILL = BILL + "                   Total  :" + "     " + hasilTotal + "\n";
+            BILL = BILL + "                   Bayar  :" + "     " + bayar + "\n";
+            BILL = BILL + "                   Kembali:" + "     " + kembalian + "\n";
+
+            BILL = BILL + "-----------------------------------------------";
+            BILL = BILL +"\n";
+            BILL = BILL + "\n\n ";
+
+            mmOutputStream.write(BILL.getBytes());
+            System.out.println(BILL);
+
+            // tell the user data were sent
+            Toast.makeText(Cart.this, "Cetak sedang diproses", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void findBT() {
+
+        try {
+            mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+
+            if(mBluetoothAdapter == null) {
+                Toast.makeText(Cart.this,"No bluetooth adapter available",Toast.LENGTH_SHORT).show();
+//                myLabel.setText("No bluetooth adapter available");
+            }
+
+            if(!mBluetoothAdapter.isEnabled()) {
+                Intent enableBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                startActivityForResult(enableBluetooth, 0);
+            }
+
+            Set<BluetoothDevice> pairedDevices = mBluetoothAdapter.getBondedDevices();
+
+            if(pairedDevices.size() > 0) {
+                for (BluetoothDevice device : pairedDevices) {
+
+                    // RPP300 is the name of the bluetooth printer device
+                    // we got this name from the list of paired devices
+                    if (device.getName().equals(btpreferences.getString("namabt",null))) {
+                        mmDevice = device;
+                        break;
+                    }
+                }
+            }
+
+            Toast.makeText(Cart.this, "Bluetoot ditemukan", Toast.LENGTH_SHORT).show();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    // tries to open a connection to the bluetooth printer device
+    void openBT() throws IOException {
+        try {
+
+            // Standard SerialPortService ID
+            UUID uuid = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
+            mmSocket = mmDevice.createRfcommSocketToServiceRecord(uuid);
+            mmSocket.connect();
+            mmOutputStream = mmSocket.getOutputStream();
+            mmInputStream = mmSocket.getInputStream();
+
+            beginListenForData();
+
+            Toast.makeText(Cart.this, "Bluettoth Terbuka", Toast.LENGTH_SHORT).show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+     * after opening a connection to bluetooth printer device,
+     * we have to listen and check if a data were sent to be printed.
+     */
+    void beginListenForData() {
+        try {
+            final Handler handler = new Handler();
+
+            // this is the ASCII code for a newline character
+            final byte delimiter = 10;
+
+            stopWorker = false;
+            readBufferPosition = 0;
+            readBuffer = new byte[1024];
+
+            workerThread = new Thread(new Runnable() {
+                public void run() {
+
+                    while (!Thread.currentThread().isInterrupted() && !stopWorker) {
+
+                        try {
+
+                            int bytesAvailable = mmInputStream.available();
+
+                            if (bytesAvailable > 0) {
+
+                                byte[] packetBytes = new byte[bytesAvailable];
+                                mmInputStream.read(packetBytes);
+
+                                for (int i = 0; i < bytesAvailable; i++) {
+
+                                    byte b = packetBytes[i];
+                                    if (b == delimiter) {
+
+                                        byte[] encodedBytes = new byte[readBufferPosition];
+                                        System.arraycopy(
+                                                readBuffer, 0,
+                                                encodedBytes, 0,
+                                                encodedBytes.length
+                                        );
+
+                                        // specify US-ASCII encoding
+                                        final String data = new String(encodedBytes, "US-ASCII");
+                                        readBufferPosition = 0;
+
+                                        // tell the user data were sent to bluetooth printer device
+                                        handler.post(new Runnable() {
+                                            public void run() {
+                                                Toast.makeText(Cart.this, data, Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+
+                                    } else {
+                                        readBuffer[readBufferPosition++] = b;
+                                    }
+                                }
+                            }
+
+                        } catch (IOException ex) {
+                            stopWorker = true;
+                        }
+
+                    }
+                }
+            });
+
+            workerThread.start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

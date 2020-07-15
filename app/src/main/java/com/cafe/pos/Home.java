@@ -95,7 +95,17 @@ public class Home extends AppCompatActivity {
     }
 
     public void btnCart(View view) {
-        Intent intent = new Intent(Home.this,Print.class);
+        Intent intent = new Intent(Home.this,Cart.class);
+        startActivity(intent);
+    }
+
+    public void nonCoffe(View v) {
+        Intent intent = new Intent(Home.this,NonCoffe.class);
+        startActivity(intent);
+    }
+
+    public void snack(View v) {
+        Intent intent = new Intent(Home.this,Snack.class);
         startActivity(intent);
     }
 }

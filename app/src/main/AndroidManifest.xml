@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesNonSdkApi="true">
-        <activity android:name=".Print"></activity>
+        <activity android:name=".btSetting"></activity>
+        <activity android:name=".Print" />
         <activity android:name=".DeviceList" />
         <activity android:name=".AddUser" />
         <activity android:name=".ManageDrink" />
@@ -47,6 +48,8 @@
         <activity android:name=".Coffe" />
         <activity android:name=".EditDrink" />
         <activity android:name=".ManageUser" />
+        <activity android:name=".Snack" />
+        <activity android:name=".NonCoffe" />
     </application>
 
 </manifest>

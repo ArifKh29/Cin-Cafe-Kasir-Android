@@ -19,17 +19,20 @@
                 android:layout_width="341dp"
                 android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.SearchView
-                android:layout_width="300dp"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="Cinnar - Menu"
+                    android:textColor="@color/clrLogin"
+                    android:textSize="20dp"
+                    android:textStyle="bold"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
-
                     android:layout_marginStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_cart_color"
-                    android:onClick="btnCart"/>
+                    android:onClick="btnCart" />
             </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -25,7 +25,7 @@ public class NonCoffe extends AppCompatActivity {
     private ArrayList<FoodMdl> foodMdlArrayList;
     private FoodAdapter.RecyclerViewListener listener;
     private RequestQueue mRequestQueue;
-    String ket;
+    private String ket;
     DataHelper db;
 
     @Override
@@ -36,6 +36,7 @@ public class NonCoffe extends AppCompatActivity {
         db = new DataHelper(this);
         foodMdlArrayList = new ArrayList<>();
         addData();
+
     }
 
     private void setOnClickListener() {
@@ -106,10 +107,11 @@ public class NonCoffe extends AppCompatActivity {
                         String idmenu = id;
                         String nama = dtxtNama.getText().toString();
                         String harga = dtxtHarga.getText().toString();
-                        String dbjumlah = txtTtlJumlah.getText().toString();
-                        String subtotal = jumlah.getText().toString();
-                        Toast.makeText(getApplicationContext(),idtrx,Toast.LENGTH_LONG).show();
-                        db.addtoCart(idtrx, idmenu,nama,harga,ket, dbjumlah,subtotal );
+                        String dbjumlah = jumlah.getText().toString();
+                        String subtotal = txtTtlJumlah.getText().toString();
+                        Toast.makeText(getApplicationContext(),"Berhasil Ditambahkan",Toast.LENGTH_LONG).show();
+                        db.addtoCart(idtrx, idmenu, nama, harga,ket, dbjumlah,subtotal );
+                        dialog.cancel();
                     }
                 });
 
@@ -119,7 +121,7 @@ public class NonCoffe extends AppCompatActivity {
     }
 
     void addData(){
-        Cursor cursor = db.showCoffe();
+        Cursor cursor = db.showNonCoffe();
         if (cursor.getCount()==0){
             Toast.makeText(getApplicationContext(), "NO DATA", Toast.LENGTH_LONG).show();
         }else {
@@ -130,7 +132,7 @@ public class NonCoffe extends AppCompatActivity {
                 foodMdl.setHot(cursor.getString(2));
                 foodMdl.setIce(cursor.getString(3));
                 foodMdl.setJenis(cursor.getString(4));
-                foodMdl.setImg(cursor.getBlob(5));
+                foodMdl.setImg(cursor.getBlob(6));
                 foodMdlArrayList.add(foodMdl);
 
             }

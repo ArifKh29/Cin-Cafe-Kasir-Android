@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DataHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME="pos.db";
@@ -159,13 +158,23 @@ public class DataHelper extends SQLiteOpenHelper {
 
     public Cursor showMenu(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM menu",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM menu WHERE jenis='Food' OR jenis='Bakery'",null);
+        return cursor;
+    }
+    public Cursor showSnack(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM menu WHERE jenis='Snack'",null);
         return cursor;
     }
 
     public Cursor showCoffe(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM drink WHERE jenis='Cinnar Espresso'",null);
+        return cursor;
+    }
+    public Cursor showNonCoffe(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM drink WHERE jenis='Non Coffe'",null);
         return cursor;
     }
 
@@ -185,6 +194,12 @@ public class DataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String idtrx = genID();
         System.out.println(idtrx);
+        Cursor cursor = db.rawQuery("SELECT id_cart,id_trx,nama_pesanan,harga,ket,jumlah,subtotal FROM cart WHERE id_trx ='"+idtrx+"'",null);
+        return cursor;
+    }
+    public Cursor showCartStruk(String idtrx){
+        SQLiteDatabase db = this.getReadableDatabase();
+
         Cursor cursor = db.rawQuery("SELECT id_cart,id_trx,nama_pesanan,harga,ket,jumlah,subtotal FROM cart WHERE id_trx ='"+idtrx+"'",null);
         return cursor;
     }
@@ -389,6 +404,13 @@ public class DataHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "INSERT INTO user (username, nama, password, status) VALUES ('"+username+"', '"+nama+"', '"+pass+"', 'user')";
         db.execSQL(query);
+    }
+
+    public Cursor getExcelData(String tglawal, String tglakhir) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT id_trx, nama, tanggal, total, bayar, kembalian FROM transaksi JOIN user ON transaksi.id_user=user.id_user",null);
+        return cursor;
+
     }
 }
 

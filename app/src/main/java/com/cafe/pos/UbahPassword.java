@@ -24,7 +24,7 @@ public class UbahPassword extends AppCompatActivity {
         setContentView(R.layout.activity_ubah_password);
         sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         pass = findViewById(R.id.passnew);
-        konf = findViewById(R.id.konfirm);
+        konf = findViewById(R.id.btNew);
         simpan = findViewById(R.id.buttonSimpan);
         dataHelper = new DataHelper(this);
         simpan.setOnClickListener(new View.OnClickListener() {
